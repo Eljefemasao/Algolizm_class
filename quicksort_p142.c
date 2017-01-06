@@ -48,10 +48,11 @@ int partition(left,right,q)
      int left,right,q;
 {
   int i,j;
-  i = left -1; j=right;
+  i = left +1; j=right;
   do{
     do i= i+1; while(data[i]<q);
     do j= j-1; while(data[j]>q);
+    if(i<j)swap(i,j);
   }while(i<j);
   swap(i,right);
   return(i);
@@ -86,13 +87,13 @@ int inputdata(){
 int quicksort(left,right)
      int left, right;
 {
-  int cutoff,privot,i;
+  int cutoff,pivot,i;
   cutoff=10;
-  if((right-left)<cutoff)insertionsort(left,right);
+  if((right-left)<cutoff) insertionsort(left,right);
   else{
-    privot = find_median3(left,right);
-    i= partition(left,right,privot);
-    quicksort(left,1);
+    pivot = find_median3(left,right);
+    i= partition(left,right,pivot);
+    quicksort(left,i-1);
     quicksort(i+1,right);
   }
   return 0;
